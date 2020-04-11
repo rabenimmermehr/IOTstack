@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pushd ~/IOTstack
+pushd /home/ansible/IOTstack
 
 [ -d ./backups ] || mkdir ./backups
 
@@ -8,6 +8,7 @@ pushd ~/IOTstack
 echo "./docker-compose.yml" >list.txt
 echo "./services/" >>list.txt
 echo "./volumes/" >>list.txt
+echo "./scripts/" >>list.txt
 
 #if influxdb is running
 if [ $(docker ps | grep -c influxdb) -gt 0 ]; then
@@ -30,12 +31,12 @@ sudo tar -czf \
 rm list.txt
 
 #set permission for backup files
-sudo chown pi:pi ./backups/backup*
+sudo chown ansible:ansible ./backups/backup*
 
 #create local logfile and append the latest backup file to it
 echo "backup saved to ./backups/$backupfile"
 sudo touch $logfile
-sudo chown pi:pi $logfile
+sudo chown ansible:ansible $logfile
 echo $backupfile >>$logfile
 
 #show size of archive file
