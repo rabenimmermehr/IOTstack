@@ -75,6 +75,9 @@ services:
       - /sys:/rootfs/sys:ro
       - /proc:/rootfs/proc:ro
       - /etc:/rootfs/etc:ro
+      # For temperature & cpu freq monitoring
+      - ./services/telegraf/rpi-temp:/usr/local/bin/rpi-temp:ro
+      - ./services/telegraf/rpi-freq:/usr/local/bin/rpi-freq:ro
     depends_on:
       - influxdb
 
